@@ -14,7 +14,10 @@ export default function RootLayout({ children }) {
             <a href="/" className="text-xl font-bold text-blue-600">
               🔨 TradeBoard
             </a>
-            <a href="/new-job" className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700">
+            <a
+              href="/new-job"
+              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
               + Post a Job
             </a>
           </div>

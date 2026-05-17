@@ -65,7 +65,7 @@ NEXT_PUBLIC_API_URL=http://localhost:4000
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/YOURUSERNAME/globaltna-assessment.git
+git clone https://github.com/Kafoor-Nimas/globaltna-assessment.git
 cd globaltna-assessment
 ```
 

@@ -23,7 +23,6 @@ export default function HomePage() {
 
   return (
     <div>
-      {/* Page Header */}
       <div className="mb-8 flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Service Requests</h1>
@@ -31,12 +30,12 @@ export default function HomePage() {
             Browse open trade jobs in your area
           </p>
         </div>
-        <Link
+        {/* <Link
           href="/new-job"
           className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
         >
           + Post a Job
-        </Link>
+        </Link> */}
       </div>
 
       {/* Filters */}
@@ -80,7 +79,7 @@ export default function HomePage() {
         )}
       </div>
 
-      {/* Loading Skeleton */}
+      {/* Loading  */}
       {loading && (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 6 }).map((_, i) => (
