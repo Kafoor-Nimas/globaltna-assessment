@@ -61,4 +61,33 @@ const createJob = async (req, res) => {
   }
 };
 
-export { getAllJobs, getSingleJob };
+const updateStatus = async (req, res) => {
+  try {
+    const { status, id } = req.body;
+
+    if (!status) {
+      return res.json({ success: false, message: "status is required" });
+    }
+
+    await jobRequestModel.findByIdAndUpdate(id, { status });
+    res.json({ success: true, message: "Status updated succefully" });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+const deleteJob = async(req,res)=>{
+  try {
+    const {id}=req.body
+
+    await jobRequestModel.findOneAndDelete(id)
+
+    res.json({success:true,message:"Job deleted successfully"})
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+}
+
+export { getAllJobs, getSingleJob ,createJob,updateStatus,deleteJob};
