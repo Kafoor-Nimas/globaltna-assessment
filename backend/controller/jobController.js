@@ -1,8 +1,13 @@
-import jobRequestModel from "../models/jobRequestModel";
+import jobRequestModel from "../models/jobRequestModel.js";
 
 const getAllJobs = async (req, res) => {
   try {
-    const jobs = await jobRequestModel.find({});
+    const { category, status } = req.query;
+    const filter = {};
+
+    if (category) filter.category = category;
+    if (status) filter.status = status;
+    const jobs = await jobRequestModel.find(filter).sort({ createdAt: -1 });
     res.json({ success: true, data: jobs });
   } catch (error) {
     console.log(error);
@@ -12,7 +17,7 @@ const getAllJobs = async (req, res) => {
 
 const getSingleJob = async (req, res) => {
   try {
-    const { id } = req.body;
+    const { id } = req.params;
 
     const job = await jobRequestModel.findById(id);
 
@@ -35,7 +40,7 @@ const createJob = async (req, res) => {
       category,
       location,
       contactName,
-      contactDetails,
+      contactEmail,
     } = req.body;
 
     if (!title || !description) {
@@ -63,10 +68,19 @@ const createJob = async (req, res) => {
 
 const updateStatus = async (req, res) => {
   try {
-    const { status, id } = req.body;
+    const { id } = req.params;
+    const { status } = req.body;
+    const allowed = ["Open", "In Progress", "Closed"];
 
     if (!status) {
       return res.json({ success: false, message: "status is required" });
+    }
+
+    if (!allowed.includes(status)) {
+      return res.json({
+        success: false,
+        message: `status must be one of: ${allowed.join(", ")}`,
+      });
     }
 
     await jobRequestModel.findByIdAndUpdate(id, { status });
@@ -77,17 +91,17 @@ const updateStatus = async (req, res) => {
   }
 };
 
-const deleteJob = async(req,res)=>{
+const deleteJob = async (req, res) => {
   try {
-    const {id}=req.body
+    const { id } = req.params;
 
-    await jobRequestModel.findOneAndDelete(id)
+    await jobRequestModel.findByIdAndDelete(id);
 
-    res.json({success:true,message:"Job deleted successfully"})
+    res.json({ success: true, message: "Job deleted successfully" });
   } catch (error) {
     console.log(error);
     res.json({ success: false, message: error.message });
   }
-}
+};
 
-export { getAllJobs, getSingleJob ,createJob,updateStatus,deleteJob};
+export { getAllJobs, getSingleJob, createJob, updateStatus, deleteJob };
