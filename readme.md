@@ -74,7 +74,7 @@ cd globaltna-assessment
 ```bash
 cd backend
 npm install
-npm run dev
+npm run server
 ```
 
 Server starts on http://localhost:4000
