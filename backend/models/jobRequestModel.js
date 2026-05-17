@@ -36,6 +36,6 @@ const jobRequestSchema = new mongoose.Schema(
 );
 
 const jobRequestModel =
-  mongoose.models.jobRequest || mongoose.model("jobRequest", jobRequestSchema,"jobRequests");
+  mongoose.models.jobRequest || mongoose.model("jobRequest", jobRequestSchema);
 
 export default jobRequestModel;
